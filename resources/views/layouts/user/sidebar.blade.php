@@ -1,0 +1,20 @@
+<div class="main-sidebar sidebar-style-2">
+    <aside id="sidebar-wrapper">
+        <div class="sidebar-brand">
+            <a href="#">Teknik Informatika | RPL</a>
+        </div>
+        <div class="sidebar-brand sidebar-brand-sm">
+            <a href="#">RPL</a>
+        </div>
+        <ul class="sidebar-menu">
+            <li class="sidebar-menu">Menu</li>
+            <li class="{{ Route::is('admin.dashboard') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('admin.dashboard') }}">
+                    <i class="fas fa-home">
+                        <span>Dashboard</span>
+                    </i>
+                </a>
+            </li>
+        </ul>
+    </aside>
+</div>
