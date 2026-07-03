@@ -3,45 +3,47 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Validator;
-use App\Models\User;
-use PharIo\Manifest\Email;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AuthController extends Controller
 {
     public function login(Request $request)
     {
-        $validator = Validator::make($request -> all(),[
+        $validator = Validator::make($request->all(), [
             'email' => 'required|email:dns',
             'password' => 'required|min:8|max:15',
         ]);
 
-        if ($validator -> fails()){
+        if ($validator->fails()) {
             Alert::error('Error', 'Pastikan semua email dan password terisi dengan benar!');
+            return redirect()->back();
         }
 
         if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password])) {
             toast('Selamat datang admin!', 'success');
             return redirect()->route('admin.dashboard');
-        } elseif (Auth::attempt(['email' => $request ->email, 'password' => $request->password])) {
+        } elseif (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             toast('Selamat datang!', 'success');
             return redirect()->route('user.dashboard');
         } else {
-            Alert::error('Loggin gagal!', 'Email atau password tidak valid!');
+            Alert::error('Login gagal!', 'Email atau password tidak valid!');
             return redirect()->back();
         }
     }
 
-    public function admin_logout() {
+    public function admin_logout()
+    {
         Auth::guard('admin')->logout();
         toast('Berhasil logout!', 'success');
         return redirect('/');
     }
 
-    public function user_logout() {
+    public function user_logout()
+    {
         Auth::logout();
         toast('Berhasil logout!', 'success');
         return redirect('/');
@@ -61,17 +63,16 @@ class AuthController extends Controller
             'password' => 'required|min:8|max:8',
         ]);
 
-        if ($validator -> fails()) 
-        {
+        if ($validator->fails()) {
             Alert::error('gagal!', 'Pastikan semua terisi dengan benar!');
-            return redirect() -> back();
+            return redirect()->back();
         }
 
         $user = User::create([
-            'name' => $request -> name,
-            'email' => $request -> email,
-            'password' => bcrypt($request -> password),
-            'point' => 10000, 
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'point' => 10000,
         ]);
 
         if ($user) {
@@ -79,7 +80,7 @@ class AuthController extends Controller
             return redirect('/');
         } else {
             Alert::error('Gagal!', 'Akun gagal dibuat, silahkan coba lagi!');
-            return redirect() -> back();
+            return redirect()->back();
         }
     }
 }

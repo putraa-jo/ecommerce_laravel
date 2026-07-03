@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name'=>'user1',
-            'email'=>'user@gmail.comm',
+            'email'=>'user@gmail.com',
             'password'=>bcrypt('123456789'),
             'point'=>10000,
         ]);
@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
         Admin::create([
             'name'=>'admin',
             'username'=>'Admin',
-            'email'=>'admin@gamil.com',
+            'email'=>'admin@gmail.com',
             'password'=>bcrypt('123456789'),
         ]);
     }

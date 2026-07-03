@@ -8,11 +8,25 @@
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">Menu</li>
-            <li class="{{ Route::is('admin.dashboard' ? 'active' : '' )}}">
+            <li class="{{ Route::is('admin.dashboard') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('admin.dashboard' )}}"><i class="fas fa-home"></i><span>Dashboard</span></a>
             </li>
 
-            <li class="{{ Route::is('admin.product') ? 'active' : ''}}"><a class="nav-link" href="{{ route('admin.product') }}"><i><span>Produk</span></i></a></li>
+            <li class="{{ Request::is('product*') ? 'active' : '' }}">
+               <a class="nav-link" href="{{ route('admin.product') }}"><i class="fas fa-box"></i> <span>Produk</span></a>
+            </li>
+
+            <li class="{{ Request::is('flash-sale*') ? 'active' : '' }}">
+               <a class="nav-link" href="{{ route('admin.flash-sale') }}"><i class="fas fa-bolt"></i> <span>Flash Sale</span></a>
+            </li>
+            
+            <li class="{{ Request::is('distributor*') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('admin.distributor') }}"><i class="fas fa-user"></i> <span>Distributor</span></a>
+            </li>
+
+            <li class="{{ Request::is('history*') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('admin.history') }}"><i class="fas fa-book"></i> <span>Riwayat Pembelian</span></a>
+            </li>
         </ul>
     </aside>
 </div>

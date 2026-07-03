@@ -10,6 +10,11 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'price', 'category', 'description', 'image'
+        'id_distributor', 'name', 'price', 'category', 'description', 'stock', 'image'
     ];
+
+    public function flashSales()
+    {
+        return $this->hasMany(FlashSale::class);
+    }
 }
